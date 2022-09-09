@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "id": "allaybottle",
+  "version": "${version}",
+  "name": "Allay in a Bottle",
+  "description": "Allay in a Bottle",
+  "authors": [
+    "thepiguy"
+  ],
+  "contact": {
+    "homepage": "https://example.com/",
+    "issues": "https://example.com/",
+    "sources": "https://example.com/"
+  },
+  "license": "MIT",
+  "icon": "assets/mod_name/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      {
+        "adapter": "kotlin",
+        "value": "me.piguy.allaybottle.AllayBottle"
+      }
+    ],
+    "client": [
+      {
+        "adapter": "kotlin",
+        "value": "me.piguy.allaybottle.AllayBottleClient"
+      }
+    ]
+  },
+  "mixins": [
+    "allaybottle.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.14.9",
+    "fabric-api": "*",
+    "fabric-language-kotlin": ">=1.8.3+kotlin.1.7.10",
+    "minecraft": "~1.19",
+    "java": ">=17"
+  }
+}
