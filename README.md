@@ -22,4 +22,4 @@ The code is licensed under the MIT license
 
 ---
 
-©️ Kunal Dandekar - 2022
+© Kunal Dandekar - 2022
