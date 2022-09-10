@@ -16,7 +16,7 @@ object ModItemInitialiser {
     registerItem(
       "allay_bottle",
       AllayBottleItem(FabricItemSettings()
-        .maxCount(1)
+        .maxCount(16)
         .recipeRemainder(Items.GLASS_BOTTLE)
         .group(ItemGroup.MISC)
         .rarity(Rarity.EPIC)
