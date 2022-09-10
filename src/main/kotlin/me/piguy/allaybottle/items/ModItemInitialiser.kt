@@ -19,7 +19,7 @@ object ModItemInitialiser {
         .maxCount(16)
         .recipeRemainder(Items.GLASS_BOTTLE)
         .group(ItemGroup.MISC)
-        .rarity(Rarity.EPIC)
+        .rarity(Rarity.RARE)
       )
     )
 
