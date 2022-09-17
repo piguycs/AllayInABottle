@@ -1,0 +1,33 @@
+modLoader = "javafml"
+loaderVersion = "[43,)"
+license = "MIT"
+
+[[mods]]
+modId = "allaybottle"
+version = "${version}"
+displayName = "Allay in a Bottle"
+authors = "thepiguy"
+description = '''
+Allay in a Bottle
+'''
+
+[[dependencies.allaybottle]]
+modId = "forge"
+mandatory = true
+versionRange = "[43,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.allaybottle]]
+modId = "minecraft"
+mandatory = true
+versionRange = "[1.19.2,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.allaybottle]]
+modId = "architectury"
+mandatory = true
+versionRange = "[6.2.46,)"
+ordering = "AFTER"
+side = "BOTH"

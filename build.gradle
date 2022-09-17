@@ -1,0 +1,59 @@
+// I VERY CBA TRANSFERING THIS TO KOTLIN, DEAL WITH IT
+
+plugins {
+    id "architectury-plugin" version "3.4-SNAPSHOT"
+    id "dev.architectury.loom" version "0.12.0-SNAPSHOT" apply false
+    id "org.jetbrains.kotlin.jvm" version "1.7.10"
+}
+
+architectury {
+    minecraft = rootProject.minecraftVersion
+}
+
+subprojects {
+    apply plugin: "kotlin"
+    apply plugin: "dev.architectury.loom"
+
+    loom {
+        silentMojangMappingsLicense()
+    }
+
+    dependencies {
+        minecraft "com.mojang:minecraft:${rootProject.minecraftVersion}"
+        mappings "net.fabricmc:yarn:${rootProject.yarnMappings}:v2"
+
+        modApi "dev.architectury:architectury:6.2.46"
+        implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk8'
+    }
+
+    kotlin {
+        jvmToolchain {
+            languageVersion.set(JavaLanguageVersion.of("17"))
+        }
+    }
+}
+
+allprojects {
+    apply plugin: "java"
+    apply plugin: "architectury-plugin"
+
+    version = "1.0.0"
+    group = "me.piguy"
+
+    base {
+        archivesName = "Allay-In-A-Bottle"
+    }
+
+    repositories {
+
+    }
+
+    tasks.withType(JavaCompile) {
+        options.encoding = "UTF-8"
+        sourceCompatibility = targetCompatibility = JavaVersion.VERSION_17
+    }
+
+    java {
+        withSourcesJar()
+    }
+}
