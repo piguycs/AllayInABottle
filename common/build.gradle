@@ -1,0 +1,15 @@
+// I VERY CBA TRANSFERING THIS TO KOTLIN, DEAL WITH IT
+
+architectury {
+    common(["fabric","forge"])
+}
+
+loom {
+    accessWidenerPath = file("src/main/resources/allaybottle.accesswidener")
+}
+
+dependencies {
+    // We depend on fabric loader here to use the fabric @Environment annotations and get the mixin dependencies
+    // Do NOT use other classes from fabric loader
+    modImplementation "net.fabricmc:fabric-loader:${rootProject.loaderVersion}"
+}

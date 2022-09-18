@@ -1,0 +1,52 @@
+plugins {
+    id("fabric-loom") version "0.12-SNAPSHOT"
+    kotlin("jvm") version "1.7.10"
+}
+
+base {
+    archivesName.set("Allay-In-A-Bottle")
+}
+
+version = "1.0.0"
+group = "me.piguy"
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    minecraft("com.mojang:minecraft:${property("minecraftVersion")}")
+    mappings("net.fabricmc:yarn:${property("yarnMappings")}:v2")
+    modImplementation("net.fabricmc:fabric-loader:${property("loaderVersion")}")
+    modImplementation("net.fabricmc.fabric-api:fabric-api:${property("fabricVersion")}")
+
+    modImplementation("net.fabricmc:fabric-language-kotlin:${property("fabricKotlinVersion")}")
+}
+
+tasks {
+    val javaVersion = JavaVersion.VERSION_17
+    withType<JavaCompile> {
+        options.encoding = "UTF-8"
+        sourceCompatibility = javaVersion.toString()
+        targetCompatibility = javaVersion.toString()
+        options.release.set(javaVersion.toString().toInt())
+    }
+    withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> { kotlinOptions { jvmTarget = javaVersion.toString() } }
+    jar {
+        from("LICENSE") {
+            rename {
+                "${it}_${base.archivesName}"
+            }
+        }
+    }
+    processResources {
+        inputs.property("version", project.version)
+        filesMatching("fabric.mod.json") { expand(mutableMapOf("version" to project.version)) }
+    }
+    java {
+        toolchain { languageVersion.set(JavaLanguageVersion.of(javaVersion.toString())) }
+        sourceCompatibility = javaVersion
+        targetCompatibility = javaVersion
+        withSourcesJar()
+    }
+}

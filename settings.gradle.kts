@@ -1,13 +1,15 @@
 pluginManagement {
     repositories {
-        maven("https://maven.fabricmc.net") { name = "Fabric" }
+        maven("https://maven.fabricmc.net")
+        maven("https://maven.architectury.dev/")
+        maven("https://maven.minecraftforge.net/")
         mavenCentral()
         gradlePluginPortal()
     }
-    plugins {
-        val loomVersion: String by settings
-        id("fabric-loom").version(loomVersion)
-        val kotlinVersion: String by System.getProperties()
-        kotlin("jvm").version(kotlinVersion)
-    }
 }
+
+include("common")
+include("fabric")
+include("forge")
+
+rootProject.name = "Allay-In-A-Bottle"
