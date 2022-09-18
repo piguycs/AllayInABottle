@@ -28,8 +28,21 @@ configurations {
     developmentForge.extendsFrom common
 }
 
+repositories {
+    maven { url = 'https://thedarkcolour.github.io/KotlinForForge/' }
+}
+
 dependencies {
     forge "net.minecraftforge:forge:${rootProject.forge_version}"
+
+    modImplementation "thedarkcolour:kotlinforforge:3.7.1"
+
+    Closure exclude_annotations = { exclude group: 'org.jetbrains', module: 'annotations' }
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:${rootProject.kotlinVersion}", exclude_annotations)
+    implementation("org.jetbrains.kotlin:kotlin-reflect:${rootProject.kotlinVersion}", exclude_annotations)
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4", exclude_annotations)
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-jdk8:1.6.4", exclude_annotations)
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.4.0", exclude_annotations)
 
     common(project(path: ":common", configuration: "namedElements")) { transitive false }
     shadowCommon(project(path: ":common", configuration: "transformProductionForge")) { transitive = false }
@@ -71,4 +84,8 @@ components.java {
     withVariantsFromConfiguration(project.configurations.shadowRuntimeElements) {
         skip()
     }
+}
+
+compileKotlin {
+    kotlinOptions.jvmTarget = '17'
 }
