@@ -15,6 +15,8 @@ object ModItemInitialiserImpl {
     val REGISTRY: DeferredRegister<Item> = DeferredRegister.create(ForgeRegistries.ITEMS, AllayBottle.MOD_ID)
 
     private val ALLAY_BOTTLE_FORGE by REGISTRY.registerObject("allay_bottle") {
+        // Made it so it will print log message
+        AllayBottle.onInitialize()
         AllayBottleItem(getSettings()).also { ModItemInitialiser.ALLAY_BOTTLE = it }
     }
 
