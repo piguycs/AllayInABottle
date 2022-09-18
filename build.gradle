@@ -37,7 +37,7 @@ allprojects {
     apply plugin: "java"
     apply plugin: "architectury-plugin"
 
-    version = "1.0.0"
+    version = "${rootProject.modVersion}"
     group = "me.piguy"
 
     base {
