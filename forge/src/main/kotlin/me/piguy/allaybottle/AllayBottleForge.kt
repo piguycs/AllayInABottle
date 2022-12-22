@@ -6,7 +6,9 @@ import thedarkcolour.kotlinforforge.forge.MOD_BUS
 
 @Mod(AllayBottle.MOD_ID)
 class AllayBottleForge {
-    init {
-        ModItemInitialiserImpl.REGISTRY.register(MOD_BUS)
-    }
+
+  init {
+    ModItemInitialiserImpl.REGISTRY.register(MOD_BUS)
+
+  }
 }

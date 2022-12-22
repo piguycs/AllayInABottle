@@ -4,7 +4,7 @@ license = "MIT"
 
 [[mods]]
 modId = "allaybottle"
-version = "${version}"
+version = "1.1.1"
 displayName = "Allay in a Bottle"
 authors = "thepiguy"
 description = '''
@@ -21,13 +21,13 @@ side = "BOTH"
 [[dependencies.allaybottle]]
 modId = "minecraft"
 mandatory = true
-versionRange = "[1.19.2,)"
+versionRange = "[1.19.3,)"
 ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.allaybottle]]
 modId = "architectury"
 mandatory = true
-versionRange = "[6.2.46,)"
+versionRange = "[7.0.65,)"
 ordering = "AFTER"
 side = "BOTH"

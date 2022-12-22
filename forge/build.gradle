@@ -35,7 +35,7 @@ repositories {
 dependencies {
     forge "net.minecraftforge:forge:${rootProject.forge_version}"
 
-    modImplementation "thedarkcolour:kotlinforforge:3.7.1"
+    modImplementation "thedarkcolour:kotlinforforge:3.8.0"
 
     Closure exclude_annotations = { exclude group: 'org.jetbrains', module: 'annotations' }
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:${rootProject.kotlinVersion}", exclude_annotations)

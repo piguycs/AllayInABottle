@@ -1,8 +1,6 @@
-// I VERY CBA TRANSFERING THIS TO KOTLIN, DEAL WITH IT
-
 plugins {
-    id "architectury-plugin" version "3.4-SNAPSHOT"
-    id "dev.architectury.loom" version "0.12.0-SNAPSHOT" apply false
+    id "architectury-plugin" version "3.4.143"
+    id "dev.architectury.loom" version "0.12.0.301" apply false
     id "org.jetbrains.kotlin.jvm" version "1.7.10"
 }
 
@@ -22,7 +20,7 @@ subprojects {
         minecraft "com.mojang:minecraft:${rootProject.minecraftVersion}"
         mappings "net.fabricmc:yarn:${rootProject.yarnMappings}:v2"
 
-        modApi "dev.architectury:architectury:6.2.46"
+        modApi "dev.architectury:architectury:7.0.65"
         implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk8'
     }
 
