@@ -12,7 +12,6 @@ Supports both Forge and Fabric!!
 You need to download the latest for your version (of minecraft) fabric version and also get these dependency mods
 - [Fabric API](https://modrinth.com/mod/fabric-api)
 - [Fabric Language Kotlin](https://modrinth.com/mod/fabric-language-kotlin)
-- [Architectury API](https://modrinth.com/mod/architectury-api)
     
 ### Forge
 You need to download the latest for your version (of minecraft) forge version and also get these dependency mods
@@ -39,4 +38,4 @@ The code is licensed under the MIT license
 
 ---
 
-© Kunal Dandekar - 2022
+© Kunal Dandekar - 2025
