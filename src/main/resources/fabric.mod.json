@@ -5,11 +5,12 @@
 	"name": "Allay in a Bottle",
 	"description": "A mod to allow you to put allays in bottles",
 	"authors": [
-		"piguycs"
+		"piguycs",
+        "Telezhka-the-First (ru_ru translation)",
 	],
 	"contact": {
-		"homepage": "https://fabricmc.net/",
-		"sources": "https://github.com/FabricMC/fabric-example-mod"
+		"sources": "https://github.com/piguycs/AllayInABottle/",
+        "issues": "https://github.com/piguycs/AllayInABottle/issues"
 	},
 	"license": "MIT",
 	"icon": "assets/allaybottle/icon.png",
