@@ -1,0 +1,48 @@
+{
+	"schemaVersion": 1,
+	"id": "allaybottle",
+	"version": "${version}",
+	"name": "Allay in a Bottle",
+	"description": "A mod to allow you to put allays in bottles",
+	"authors": [
+		"piguycs"
+	],
+	"contact": {
+		"homepage": "https://fabricmc.net/",
+		"sources": "https://github.com/FabricMC/fabric-example-mod"
+	},
+	"license": "MIT",
+	"icon": "assets/allaybottle/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			{
+				"value": "nl.piguy.allaybottle.AllayInABottle",
+				"adapter": "kotlin"
+			}
+		],
+		"client": [
+			{
+				"value": "nl.piguy.allaybottle.AllayInABottleClient",
+				"adapter": "kotlin"
+			}
+		]
+	},
+	"mixins": [
+		"allaybottle.mixins.json",
+		{
+			"config": "allaybottle.client.mixins.json",
+			"environment": "client"
+		}
+	],
+	"depends": {
+		"fabricloader": ">=0.16.10",
+		"minecraft": "~1.21.4",
+		"java": ">=21",
+		"fabric-api": "*",
+		"fabric-language-kotlin": "*"
+	},
+	"suggests": {
+		"another-mod": "*"
+	}
+}
