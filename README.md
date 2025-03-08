@@ -6,6 +6,7 @@ This is a simple mod which does what it says. (Puts an allay in a bottle)
 [Curseforge](https://www.curseforge.com/minecraft/mc-mods/allay-in-a-bottle)
 
 Supports both Forge and Fabric!!
+(NOTE: version for forge 1.21.4 is not up yet. it will be available soon)
 
 ## Installation
 ### Fabric
