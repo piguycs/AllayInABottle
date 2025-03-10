@@ -38,7 +38,7 @@ class AllayBottleItem(settings: Settings) : Item(settings) {
 
             if (!user.isCreative) {
                 user.getStackInHand(hand)?.decrement(1)
-                user.giveItemStack(glassBottle)
+                user.giveOrDropStack(glassBottle)
             }
 
             return ActionResult.CONSUME

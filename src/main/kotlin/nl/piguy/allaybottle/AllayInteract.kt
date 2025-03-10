@@ -23,9 +23,10 @@ object AllayInteract {
 
     private fun interact(player: PlayerEntity, hand: Hand) {
         val playerHandBottle = player.getStackInHand(hand)
-        val allayBottle = ItemStack(ModItems.ALLAY_BOTTLE)
 
-        player.giveItemStack(allayBottle)
+        val allayBottle = ItemStack(ModItems.ALLAY_BOTTLE)
+        player.giveOrDropStack(allayBottle)
+
         playerHandBottle.decrement(1)
     }
 }
