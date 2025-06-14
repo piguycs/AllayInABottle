@@ -9,6 +9,7 @@ import net.minecraft.item.Items
 import net.minecraft.server.world.ServerWorld
 import net.minecraft.util.ActionResult
 import net.minecraft.util.math.BlockPos
+import nl.piguy.allaybottle.Backports
 
 class AllayBottleItem(settings: Settings) : Item(settings) {
     override fun useOnBlock(context: ItemUsageContext): ActionResult {
@@ -38,7 +39,7 @@ class AllayBottleItem(settings: Settings) : Item(settings) {
 
             if (!user.isCreative) {
                 user.getStackInHand(hand)?.decrement(1)
-                user.giveOrDropStack(glassBottle)
+                Backports.giveOrDropStack(user, glassBottle)
             }
 
             return ActionResult.CONSUME
