@@ -5,10 +5,12 @@ import net.minecraft.entity.mob.PathAwareEntity;
 import net.minecraft.entity.passive.AllayEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.world.World;
 import nl.piguy.allaybottle.AllayInteract;
+import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -22,7 +24,10 @@ public class AllayMixin extends PathAwareEntity {
 
 	@Inject(method = "interactMob", at = @At("HEAD"), cancellable = true)
 	protected void interactMob(PlayerEntity player, Hand hand, CallbackInfoReturnable<ActionResult> cir) {
-		var interact = AllayInteract.INSTANCE.playerAllayInteract(player, hand);
+		@Nullable
+		Text allayName = this.getCustomName();
+
+		boolean interact = AllayInteract.INSTANCE.playerAllayInteract(player, hand, allayName);
 
 		if (interact) {
 			ItemStack stack = this.getStackInHand(Hand.MAIN_HAND);

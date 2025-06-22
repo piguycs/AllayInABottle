@@ -1,12 +1,15 @@
 package nl.piguy.allaybottle.items
 
+import net.minecraft.component.DataComponentTypes
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.SpawnReason
+import net.minecraft.entity.passive.AllayEntity
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import net.minecraft.item.ItemUsageContext
 import net.minecraft.item.Items
 import net.minecraft.server.world.ServerWorld
+import net.minecraft.text.Text
 import net.minecraft.util.ActionResult
 import net.minecraft.util.math.BlockPos
 
@@ -25,7 +28,7 @@ class AllayBottleItem(settings: Settings) : Item(settings) {
                     blockPos
                 } else blockPos.offset(direction)
 
-            EntityType.ALLAY.spawn(
+            val allay = EntityType.ALLAY.spawn(
                 world as ServerWorld,
                 null,
                 blockPos2,
@@ -33,6 +36,11 @@ class AllayBottleItem(settings: Settings) : Item(settings) {
                 false,
                 false
             )
+
+            if (allay != null) {
+                setAllayName(allay, context.stack.customName)
+            }
+
 
             val glassBottle = ItemStack(Items.GLASS_BOTTLE)
 
@@ -45,5 +53,11 @@ class AllayBottleItem(settings: Settings) : Item(settings) {
         }
 
         return super.useOnBlock(context)
+    }
+
+    private fun setAllayName(allay: AllayEntity, name: Text?) {
+        if (name != null) {
+            allay.customName = name
+        }
     }
 }
