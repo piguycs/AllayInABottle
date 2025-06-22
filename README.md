@@ -13,11 +13,6 @@ Supports both Forge and Fabric!!
 You need to download the latest for your version (of minecraft) fabric version and also get these dependency mods
 - [Fabric API](https://modrinth.com/mod/fabric-api)
 - [Fabric Language Kotlin](https://modrinth.com/mod/fabric-language-kotlin)
-    
-### Forge
-You need to download the latest for your version (of minecraft) forge version and also get these dependency mods
-- [Kotlin for Forge](https://modrinth.com/mod/kotlin-for-forge/)
-- [Architectury API](https://modrinth.com/mod/architectury-api)
 
 ## How does it work?
 
