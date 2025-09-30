@@ -11,7 +11,7 @@ import nl.piguy.allaybottle.items.ModItems
 
 object AllayInteract {
     fun playerAllayInteract(player: PlayerEntity, hand: Hand, allayName: Text?) : Boolean {
-        if (player.isSneaking && !player.world.isClient && playerHasBottle(player, hand)) {
+        if (player.isSneaking && !player.entityWorld.isClient && playerHasBottle(player, hand)) {
             interact(player, hand, allayName)
 
             return true
