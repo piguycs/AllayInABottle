@@ -1,61 +1,60 @@
 package nl.piguy.allaybottle.items
 
-import net.minecraft.component.DataComponentTypes
-import net.minecraft.entity.EntityType
-import net.minecraft.entity.SpawnReason
-import net.minecraft.entity.passive.AllayEntity
-import net.minecraft.item.Item
-import net.minecraft.item.ItemStack
-import net.minecraft.item.ItemUsageContext
-import net.minecraft.item.Items
-import net.minecraft.server.world.ServerWorld
-import net.minecraft.text.Text
-import net.minecraft.util.ActionResult
-import net.minecraft.util.math.BlockPos
+import net.minecraft.world.entity.EntityType
+import net.minecraft.world.entity.EntitySpawnReason
+import net.minecraft.world.entity.animal.allay.Allay
+import net.minecraft.world.item.Item
+import net.minecraft.world.item.ItemStack
+import net.minecraft.world.item.context.UseOnContext
+import net.minecraft.world.item.Items
+import net.minecraft.server.level.ServerLevel
+import net.minecraft.network.chat.Component
+import net.minecraft.world.InteractionResult
+import net.minecraft.core.BlockPos
 
-class AllayBottleItem(settings: Settings) : Item(settings) {
-    override fun useOnBlock(context: ItemUsageContext): ActionResult {
+class AllayBottleItem(settings: Properties) : Item(settings) {
+    override fun useOn(context: UseOnContext): InteractionResult {
         val hand = context.hand
         val user = context.player
-        val world = context.world
+        val world = context.level
 
-        if (world != null && !world.isClient && user != null) {
-            val direction = context.side
-            val blockPos = context.blockPos
+        if (world != null && !world.isClientSide && user != null) {
+            val direction = context.clickedFace
+            val blockPos = context.clickedPos
             val blockState = world.getBlockState(blockPos)
             val blockPos2: BlockPos =
                 if (blockState.getCollisionShape(world, blockPos).isEmpty) {
                     blockPos
-                } else blockPos.offset(direction)
+                } else blockPos.offset(direction.unitVec3i)
 
             val allay = EntityType.ALLAY.spawn(
-                world as ServerWorld,
+                world as ServerLevel,
                 null,
                 blockPos2,
-                SpawnReason.TRIGGERED,
+                EntitySpawnReason.TRIGGERED,
                 false,
                 false
             )
 
             if (allay != null) {
-                setAllayName(allay, context.stack.customName)
+                setAllayName(allay, context.itemInHand.customName)
             }
 
 
             val glassBottle = ItemStack(Items.GLASS_BOTTLE)
 
             if (!user.isCreative) {
-                user.getStackInHand(hand)?.decrement(1)
-                user.giveOrDropStack(glassBottle)
+                user.getItemInHand(hand)?.shrink(1)
+                user.handleExtraItemsCreatedOnUse(glassBottle)
             }
 
-            return ActionResult.CONSUME
+            return InteractionResult.CONSUME
         }
 
-        return super.useOnBlock(context)
+        return super.useOn(context)
     }
 
-    private fun setAllayName(allay: AllayEntity, name: Text?) {
+    private fun setAllayName(allay: Allay, name: Component?) {
         if (name != null) {
             allay.customName = name
         }

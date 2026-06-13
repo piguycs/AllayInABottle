@@ -1,17 +1,17 @@
 package nl.piguy.allaybottle
 
-import net.minecraft.component.DataComponentTypes
-import net.minecraft.entity.player.PlayerEntity
-import net.minecraft.item.ItemStack
-import net.minecraft.item.Items
-import net.minecraft.text.Text
-import net.minecraft.util.Hand
+import net.minecraft.core.component.DataComponents
+import net.minecraft.world.entity.player.Player
+import net.minecraft.world.item.ItemStack
+import net.minecraft.world.item.Items
+import net.minecraft.network.chat.Component
+import net.minecraft.world.InteractionHand
 import nl.piguy.allaybottle.items.ModItems
 
 
 object AllayInteract {
-    fun playerAllayInteract(player: PlayerEntity, hand: Hand, allayName: Text?) : Boolean {
-        if (player.isSneaking && !player.entityWorld.isClient && playerHasBottle(player, hand)) {
+    fun playerAllayInteract(player: Player, hand: InteractionHand, allayName: Component?) : Boolean {
+        if (player.isCrouching && !player.level().isClientSide && playerHasBottle(player, hand)) {
             interact(player, hand, allayName)
 
             return true
@@ -20,20 +20,20 @@ object AllayInteract {
         return false
     }
 
-    private fun playerHasBottle(player: PlayerEntity, hand: Hand): Boolean {
-        return player.getStackInHand(hand).item == Items.GLASS_BOTTLE
+    private fun playerHasBottle(player: Player, hand: InteractionHand): Boolean {
+        return player.getItemInHand(hand).item == Items.GLASS_BOTTLE
     }
 
-    private fun interact(player: PlayerEntity, hand: Hand, allayName: Text?) {
-        val playerHandBottle = player.getStackInHand(hand)
+    private fun interact(player: Player, hand: InteractionHand, allayName: Component?) {
+        val playerHandBottle = player.getItemInHand(hand)
 
         val allayBottle = ItemStack(ModItems.ALLAY_BOTTLE)
         if (allayName != null) {
-            allayBottle.set(DataComponentTypes.CUSTOM_NAME, allayName)
+            allayBottle.set(DataComponents.CUSTOM_NAME, allayName)
         }
 
-        player.giveOrDropStack(allayBottle)
+        player.handleExtraItemsCreatedOnUse(allayBottle)
 
-        playerHandBottle.decrement(1)
+        playerHandBottle.shrink(1)
     }
 }

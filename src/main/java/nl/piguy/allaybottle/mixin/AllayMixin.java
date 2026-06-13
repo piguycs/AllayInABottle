@@ -1,14 +1,14 @@
 package nl.piguy.allaybottle.mixin;
 
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.mob.PathAwareEntity;
-import net.minecraft.entity.passive.AllayEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.text.Text;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.Hand;
-import net.minecraft.world.World;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.PathfinderMob;
+import net.minecraft.world.entity.animal.allay.Allay;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.level.Level;
 import nl.piguy.allaybottle.AllayInteract;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
@@ -16,25 +16,25 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-@Mixin(AllayEntity.class)
-public class AllayMixin extends PathAwareEntity {
-	protected AllayMixin(EntityType<? extends PathAwareEntity> entityType, World world) {
+@Mixin(Allay.class)
+public class AllayMixin extends PathfinderMob {
+	protected AllayMixin(EntityType<? extends PathfinderMob> entityType, Level world) {
 		super(entityType, world);
 	}
 
-	@Inject(method = "interactMob", at = @At("HEAD"), cancellable = true)
-	protected void interactMob(PlayerEntity player, Hand hand, CallbackInfoReturnable<ActionResult> cir) {
+	@Inject(method = "mobInteract", at = @At("HEAD"), cancellable = true)
+	protected void interactMob(Player player, InteractionHand hand, CallbackInfoReturnable<InteractionResult> cir) {
 		@Nullable
-		Text allayName = this.getCustomName();
+		Component allayName = this.getCustomName();
 
 		boolean interact = AllayInteract.INSTANCE.playerAllayInteract(player, hand, allayName);
 
 		if (interact) {
-			ItemStack stack = this.getStackInHand(Hand.MAIN_HAND);
-			player.giveItemStack(stack);
+			ItemStack stack = this.getItemInHand(InteractionHand.MAIN_HAND);
+			player.addItem(stack);
 
 			this.discard();
-			cir.setReturnValue(ActionResult.SUCCESS);
+			cir.setReturnValue(InteractionResult.SUCCESS);
 		}
 	}
 }
